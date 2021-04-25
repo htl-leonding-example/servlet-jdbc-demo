@@ -6,9 +6,12 @@
 
 ```
 mvn clean compile
-java -jar servlet-jdbc-demo-1.0-SNAPSHOT-shaded.jar
+java -jar jetty-servlet-demo.jar
 ```
 
+### Stop Server
+
+* Ctrl + C
 
 ## Iteration 2: Add postgres
 
@@ -23,6 +26,13 @@ java -jar servlet-jdbc-demo-1.0-SNAPSHOT-shaded.jar
 ```
 docker stop postgres
 ```
+
+## Iteration 3: Add docker-compose
+
+
+
+
+
 
 
 

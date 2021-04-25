@@ -11,10 +11,10 @@ public class Database {
     static final String DATABASE = "db";
     static final String USERNAME = "app";
     static final String PASSWORD = "app";
-    public static final String URL = "jdbc:postgresql://localhost:5432/" + DATABASE;
+    public static final String URL = "jdbc:postgresql://" + getDatabaseHost() + ":5432/" + DATABASE;
 
 
-    public static DataSource getDataSource(){
+    public static DataSource getDataSource() {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setDatabaseName(DATABASE);
         dataSource.setUser(USERNAME);
@@ -22,7 +22,8 @@ public class Database {
         return dataSource;
     }
 
-    public static void createTablePerson(){
+    public static void createTablePerson() {
+        System.out.println(URL);
         try (Connection conn = getDataSource().getConnection();
              Statement stmt = conn.createStatement()
         ) {
@@ -37,5 +38,13 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getDatabaseHost() {
+        String dbHostEnvironmentVar = System.getenv("DB_HOST");
+        if (dbHostEnvironmentVar == null) {
+            return "localhost";
+        }
+        return dbHostEnvironmentVar;
     }
 }

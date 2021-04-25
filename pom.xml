@@ -42,6 +42,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <finalName>jetty-servlet-demo</finalName>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <transformers>
                                 <transformer
