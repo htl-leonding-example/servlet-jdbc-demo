@@ -31,6 +31,16 @@ docker stop postgres
 
 
 
+## Check Endpoints
+
+```
+http://localhost:8081/api/person
+http://localhost:8081/status
+http://localhost:8081/
+
+```
+
+
 
 
 

@@ -7,6 +7,9 @@ services:
       - '8081:8081'
     depends_on:
       - 'postgres'
+    environment:
+      DB_HOST: postgres
+
   postgres:
     image: postgres:13.2
     ports:
@@ -17,4 +20,3 @@ services:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: app
       POSTGRES_DB: db
-      DB_HOST: jetty

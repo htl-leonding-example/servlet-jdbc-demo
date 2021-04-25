@@ -19,6 +19,7 @@ public class Database {
         dataSource.setDatabaseName(DATABASE);
         dataSource.setUser(USERNAME);
         dataSource.setPassword(PASSWORD);
+        dataSource.setURL(URL);
         return dataSource;
     }
 

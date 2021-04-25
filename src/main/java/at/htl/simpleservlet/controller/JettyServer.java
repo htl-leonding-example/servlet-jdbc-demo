@@ -1,9 +1,8 @@
-package at.htl.simpleservlet;
+package at.htl.simpleservlet.controller;
 
 import at.htl.simpleservlet.boundary.BlockingServlet;
 import at.htl.simpleservlet.boundary.DatabaseServlet;
 import at.htl.simpleservlet.boundary.SimpleServlet;
-import at.htl.simpleservlet.controller.Database;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;

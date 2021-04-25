@@ -1,4 +1,5 @@
 pgdata/
+jetty-servlet-demo.jar
 
 target/
 gh-pages
