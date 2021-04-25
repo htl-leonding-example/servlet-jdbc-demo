@@ -1,0 +1,13 @@
+build-docs-html/
+build-docs-pdf/
+build-docs-revealjs/
+target/
+asciidocs/revealjs/
+revealjs.zip
+gh-pages
+
+.DS_Store
+
+# die intellij-Projektdaten im Root sollen nicht gespeichert werden
+/.idea
+*.iml
