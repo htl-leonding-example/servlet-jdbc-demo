@@ -1,0 +1,99 @@
+= Servlets
+Thomas W. Stütz
+1.0.0, 2021-04-25: Hwo to create a simple servlet application
+ifndef::imagesdir[:imagesdir: images]
+//:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+:toclevels: 5
+:experimental: true
+:linkattrs:   // so window="_blank" will be executed
+
+
+Sources:
+
+* https://www.baeldung.com/jetty-embedded[Baeldung, window="_blank"] (again - credits to baeldung for his excellent work)
+* https://www.javaguides.net/2018/06/Guide-to-Create-a-Simple-Maven-Web-Application.html[Guide to Create a Simple Maven Web Application, window="_blank"]
+
+== Create the project
+
+* menu:File[New>Project...]
+* select "Maven"
+* click kbd:[Next]
+* Name: `servlet-jdbc-demo`
+* click kbd:[Finish]
+
+== Insert Dependencies
+
+* We use a https://www.eclipse.org/jetty/[jetty, window="_blank"]-server for hosting
+* when using a jetty-server you can choose between using
+** https://www.eclipse.org/jetty/documentation/jetty-11/programming-guide/index.html#pg-server-http-handler[Jetty Handlers, window="_blank"] and
+** the standard https://www.eclipse.org/jetty/documentation/jetty-11/programming-guide/index.html#pg-server-http-handler-use-servlet[Servlet API Handlers, window="_blank"]
+* We will use the Jetty Handlers, which are still based on Servlet API 5.0
+
+* https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-servlet</artifactId>
+    <version>11.0.2</version>
+</dependency>
+----
+
+.Standard Servlet API
+[%collapsible%]
+====
+* https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
+* choose the latest version, ie 5.0.0
+
+IMPORTANT: The library was renamed from `javax.servlet` to `jakarta.servlet`
+
+.insert into `<dependencies>` in `pom.xml`
+[source,xml]
+----
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>5.0.0</version>
+    <scope>provided</scope>
+</dependency>
+----
+
+* https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api
+
+.We can also insert the jsp-dependency, which we will need later on
+[source,xml]
+----
+<dependency>
+    <groupId>jakarta.servlet.jsp</groupId>
+    <artifactId>jakarta.servlet.jsp-api</artifactId>
+    <version>3.0.0</version>
+    <scope>provided</scope>
+</dependency>
+----
+====
+
+* https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+* https://www.eclipse.org/jetty/documentation/jetty-11/programming_guide.php[Dokumentation]
+
+.We also need Jetty as webserver
+[source,xml]
+----
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-server</artifactId>
+    <version>11.0.2</version>
+</dependency>
+----
+
+
+
+
+
+
+
+
