@@ -1,16 +1,13 @@
 package at.htl.simpleservlet;
 
 import at.htl.simpleservlet.boundary.BlockingServlet;
+import at.htl.simpleservlet.boundary.DatabaseServlet;
 import at.htl.simpleservlet.boundary.SimpleServlet;
-import jakarta.servlet.Servlet;
+import at.htl.simpleservlet.controller.Database;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletHandler;
-
-import java.io.IOException;
-import java.net.ContentHandler;
-import java.net.URLConnection;
 
 public class JettyServer {
 
@@ -27,8 +24,10 @@ public class JettyServer {
 
         servletHandler.addServletWithMapping(SimpleServlet.class, "/");
         servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
+        servletHandler.addServletWithMapping(DatabaseServlet.class, "/api/person");
 
         server.start();
+        Database.createTablePerson();
     }
 
     void stop() throws Exception {

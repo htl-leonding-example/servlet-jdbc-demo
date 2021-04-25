@@ -1,0 +1,6 @@
+#DataSourceSettings#
+#LocalDataSource: db@localhost
+#BEGIN#
+<data-source source="LOCAL" name="db@localhost" uuid="5d2ba428-958e-4afa-949f-3e9d00daf960"><database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" exact-version="0"/><driver-ref>postgresql</driver-ref><synchronize>true</synchronize><jdbc-driver>org.postgresql.Driver</jdbc-driver><jdbc-url>jdbc:postgresql://localhost:5432/db</jdbc-url><secret-storage>master_key</secret-storage><user-name>app</user-name><schema-mapping/><working-dir>$ProjectFileDir$</working-dir></data-source>
+#END#
+

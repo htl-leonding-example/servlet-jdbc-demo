@@ -17,7 +17,9 @@ Sources:
 * https://www.baeldung.com/jetty-embedded[Baeldung, window="_blank"] (again - credits to baeldung for his excellent work)
 * https://www.javaguides.net/2018/06/Guide-to-Create-a-Simple-Maven-Web-Application.html[Guide to Create a Simple Maven Web Application, window="_blank"]
 
-== Create the project
+== Iteration 1: Create Simple Endpoints w/ Servlets
+
+=== Create the project
 
 * menu:File[New>Project...]
 * select "Maven"
@@ -25,7 +27,7 @@ Sources:
 * Name: `servlet-jdbc-demo`
 * click kbd:[Finish]
 
-== Insert Dependencies
+=== Insert Dependencies
 
 * We use a https://www.eclipse.org/jetty/[jetty, window="_blank"]-server for hosting
 * when using a jetty-server you can choose between using
@@ -89,6 +91,138 @@ IMPORTANT: The library was renamed from `javax.servlet` to `jakarta.servlet`
     <version>11.0.2</version>
 </dependency>
 ----
+
+=== Add Java Classes
+
+.JettyServer.java
+[source,java]
+----
+package at.htl.simpleservlet;
+
+import at.htl.simpleservlet.boundary.BlockingServlet;
+import at.htl.simpleservlet.boundary.SimpleServlet;
+import jakarta.servlet.Servlet;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.servlet.ServletHandler;
+
+import java.io.IOException;
+import java.net.ContentHandler;
+import java.net.URLConnection;
+
+public class JettyServer {
+
+    private Server server;
+
+    void start() throws Exception {
+        server = new Server();
+        ServerConnector connector = new ServerConnector(server);
+        connector.setPort(8081);
+        server.setConnectors(new Connector[]{connector});
+
+        ServletHandler servletHandler = new ServletHandler();
+        server.setHandler(servletHandler);
+
+        servletHandler.addServletWithMapping(SimpleServlet.class, "/");
+        servletHandler.addServletWithMapping(BlockingServlet.class, "/status");
+
+        server.start();
+    }
+
+    void stop() throws Exception {
+        server.stop();
+    }
+
+    public static void main(String[] args) throws Exception {
+        JettyServer jettyServer = new JettyServer();
+        jettyServer.start();
+    }
+}
+----
+
+.SimpleServlet.java
+[source,java]
+----
+package at.htl.simpleservlet.boundary;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class SimpleServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        PrintWriter out = resp.getWriter();
+        out.println("<html><body><h1>Hello World!</h1></body></html>");
+        out.flush();
+        out.close();
+    }
+}
+----
+
+.BlockingServlet.java
+[source,java]
+----
+package at.htl.simpleservlet.boundary;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+public class BlockingServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(
+            HttpServletRequest req,
+            HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        resp.setContentType("application/json");
+        resp.setStatus(HttpServletResponse.SC_OK);
+        resp.getWriter().println("{ \"status\": \"ok\" }");
+    }
+}
+----
+
+
+== Iteration 2 : Add Database
+
+=== pom.xml
+
+https://mvnrepository.com/artifact/org.postgresql/postgresql
+
+.Postgres JDBC Driver
+[source,xml]
+----
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.20</version>
+</dependency>
+----
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
